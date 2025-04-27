@@ -34,8 +34,8 @@ app.get('/api', async (req, res) => {
 });
 
 
-async function getAirportTemperature(icao) {
-  const airportUrl = `https://airport-data.com/api/ap_info.json?icao=${icao}`;
+async function getAirportTemperature(iata) {
+  const airportUrl = `https://airport-data.com/api/ap_info.json?iata=${iata}`;
   const airportRes = await fetch(airportUrl);
   if (!airportRes.ok) throw new Error('Invalid airport code or API error');
 
