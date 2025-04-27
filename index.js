@@ -57,7 +57,7 @@ let options = {
     region: 'US',
   },
   headers: {
-    'x-rapidapi-key': '9a9f3e7fd9mshe2baea35e74d886p1d1fe2jsnaf039bafcf52',
+    'x-rapidapi-key': process.env.RAPIDAPI_KEY,
     'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
   }
 };
