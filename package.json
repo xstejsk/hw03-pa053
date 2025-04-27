@@ -1,0 +1,17 @@
+{
+  "name": "hw03",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "live-stock-price": "^1.0.4",
+    "yahoo-finance2": "^2.13.3"
+  }
+}
