@@ -1,6 +1,8 @@
 import express from 'express';
-import yahooFinance from 'yahoo-finance2';
+import axios from 'axios';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 80;
 
@@ -48,16 +50,29 @@ async function getAirportTemperature(iata) {
   return weatherData.current_weather.temperature;
 }
 
+let options = {
+  method: 'GET',
+  url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes',
+  params: {
+    region: 'US',
+  },
+  headers: {
+    'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+  }
+};
 
 async function getStockPrice(symbol) {
   try {
-    const quote = await yahooFinance.quote(symbol);
-    if (!quote || !quote.regularMarketPrice) {
-      throw new Error('No price data for symbol');
-    }
-    return quote.regularMarketPrice;
-  } catch (err) {
-    throw new Error('Invalid stock symbol or API error');
+    const finalOptions = { ...options, params: { symbols: symbol } };
+    const response = await axios.request(finalOptions);
+    
+    const price = response.data.quoteResponse.result[0].regularMarketPrice;
+    console.log(price);
+    return price;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch stock price.');
   }
 }
 
